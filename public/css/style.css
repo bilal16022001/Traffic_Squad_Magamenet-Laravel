@@ -1,0 +1,346 @@
+
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.img_back {
+  width: 45px;
+}
+
+.parent {
+  background-color: #fff;
+  width: 92%;
+  margin: auto;
+  padding: 15px;
+  position: relative;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2);
+    border-radius: 7px;
+}
+
+.parent a:last-of-type,
+.parent a:first-of-type {
+  background-color: red;
+  color: #fff;
+  margin-left: 6px;
+  padding: 4px 10px;
+  border-radius: 5px;
+}
+
+.parent a:first-of-type {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+/*-----start login------*/
+/*-----end login------*/
+/*-----start Sidebar------*/
+.home {
+  display: flex;
+  background-color: rgba(229, 229, 229, 0.5098039216);
+}
+
+.s {
+  background-color: #414141;
+  position: relative;
+}
+.s .cnacelIcon {
+  display: none;
+  /* background-color:red; */
+}
+
+.home .sidebar {
+  height: 100vh;
+  padding: 10px 0;
+  color: #fff;
+  width: 255px;
+}
+
+.home .sidebar .ad {
+  color: #fff;
+}
+
+.home .sidebar ul li svg {
+  font-size: 18px;
+  width: 40px;
+}
+
+.home .sidebar ul li a {
+  margin-left: 13px;
+  color: #fff;
+}
+
+.home .sidebar ul,
+.home .s,
+.home .h {
+  padding: 0;
+}
+
+.home .h {
+  width: 100%;
+}
+
+.home .sidebar .logo,
+.home .sidebar .profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  position: relative;
+}
+
+.home .sidebar .logo img {
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  display: block;
+}
+
+.profile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile img {
+  width: 80px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.home .profile .dropMenu {
+  position: absolute;
+  left: 50% !important;
+  top: 100% !important;
+  transform: translateX(-50%) !important;
+}
+
+.home .profile ul {
+  background-color: #fff !important;
+}
+
+.home .profile ul li a {
+  color: black !important;
+}
+
+.home .sidebar h3,
+.home .sidebar .MenuSidebar li {
+  margin-bottom: 15px;
+  padding: 4px 30px;
+}
+
+.home .sidebar .MenuSidebar li a {
+  color: #fff;
+}
+
+.MenuSidebar .dropMenu {
+  position: relative !important;
+  transform: translate(0) !important;
+  background:none;
+}
+
+.dropMenu li {
+  padding: 0 !important;
+}
+
+.home .showDrop {
+  height: 0;
+  overflow: hidden;
+}
+
+.home .header {
+  background-color: #fff;
+  padding: 4px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home .header .bars {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/*-----end Sidebar ------*/
+.parent {
+  background-color: #fff;
+  width: 92%;
+  margin: auto;
+  padding: 15px;
+  position: relative;
+}
+
+.parent tr:nth-child(even) {
+  background-color: rgba(229, 229, 229, 0.3019607843);
+}
+
+.editPolice {
+  padding: 10px 30px;
+}
+
+.editPolice label,
+.reports label,
+.Search label,
+.newOffense label {
+  display: inline-block;
+  width: 150px;
+  margin-bottom: 12px;
+}
+
+.editPolice input,
+.newOffense input:not(:last-child) {
+  height: 35px;
+  padding-left: 10px;
+}
+
+.newOffense input:not(:last-child) {
+  margin-bottom: 17px;
+}
+
+/*------start dashboard------*/
+.admin {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 10px;
+  gap: 10px;
+}
+
+.admin > div {
+  background-color: #fff;
+  position: relative;
+  padding: 10px;
+}
+
+.admin .con {
+  font-size: 40px;
+}
+
+.view a {
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+}
+
+/*-----end dashboard---*/
+a {
+  text-decoration: none;
+}
+
+.dropMenu {
+  background-color: #414141;
+  border: none;
+}
+
+.sidebar {
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+/* STARTafter click on bars these classes will added on sidebar*/
+.addw {
+  width: 90px !important;
+  transition: all 0.3s;
+}
+
+.addSizeS {
+  font-size: 40px;
+}
+
+.shows {
+  display: none;
+}
+
+.pro_center {
+  text-align: center;
+}
+
+.imgw {
+  width: 55px !important;
+  height: 55px !important;
+}
+
+/*end after click on bars these classes will added on sidebar*/
+.back_img img {
+  width: 100%;
+  height: calc(100vh - 53px);
+}
+
+.loginA {
+  transform: translateY(-50%);
+}
+
+/*----edit profile*/
+.EditProfile ul form span {
+  display: inline-block;
+  width: 100px;
+}
+.EditProfile ul form li input {
+  width: 80%;
+  height: 35px;
+  margin-bottom: 10px;
+}
+
+/*----start mobile------*/
+@media (max-width: 767px) {
+  .s {
+    position: relative;
+  }
+  .s .cnacelIcon {
+    font-size: 30px;
+    display: flex;
+    color: #fff;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    z-index: 99;
+  }
+  .home .sidebar {
+    width: 78%;
+    position: fixed;
+    z-index: 9999;
+    inset:0;
+    background-color: #414141;
+  }
+  .home .header {
+    background-color: #fff;
+    padding: 0px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .home .header div:nth-child(2) {
+    display: none;
+  }
+  .home .header .row {
+    display: flex;
+  }
+  .admin {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    padding: 10px;
+    gap: 10px;
+  }
+  .home .header .bars {
+    font-size: 30px;
+    cursor: pointer;
+  }
+  .addw {
+    width: 0px !important;
+    transition: all 0.3s;
+  }
+  .over {
+    position: absolute;
+    inset: 9;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.368627451);
+    width: 100%;
+    height: 100vh;
+    z-index: 99;
+  }
+}
+/*----end mobile------*//*# sourceMappingURL=app.css.map */
