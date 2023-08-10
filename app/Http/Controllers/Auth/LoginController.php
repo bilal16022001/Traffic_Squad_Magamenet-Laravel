@@ -46,14 +46,14 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        if ($request->type == "offense") {
+         if ($request->type == "offense") {
             if (Auth::guard("offense")->attempt(['Phone' => $request->phone, 'password' => $request->password])) {
                 return $this->redirect($request);
                 toastr()->success("Login has been saved successfully!");
             } else {
-                return redirect()->back()->withErrors(['error' => 'Invalid credentials']);
+                return redirect()->back()->withErrors(['error' => 'Invalid credentials offense']);
             }
-        } else {
+        }else {
             if (Auth::guard($this->checkguard($request))->attempt(['email' => $request->email, 'password' => $request->password])) {
                 return $this->redirect($request);
                 toastr()->success("Login has been saved successfully!");

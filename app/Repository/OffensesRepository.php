@@ -51,14 +51,14 @@ class OffensesRepository implements OffensesInterface
     {
 
         $item = Offense::findOrFail($id);
-        if (Auth::guard('web')->check()) {
-            return view("pages.Offenses.DetailOffense", compact("item"));
-        }
-        if (Auth::guard('police')->check()) {
-            return view("pages.Offenses.DetailOffense", compact("item"));
-        } else {
-            return view("pages.Offenses.DetailOffense", compact("item"));
-        }
+        // if (Auth::guard('web')->check()) {
+        //     return view("pages.Offenses.DetailOffense", compact("item"));
+        // }
+        // if (Auth::guard('police')->check()) {
+        //     return view("pages.Offenses.DetailOffense", compact("item"));
+        // } else {
+        return view("pages.Offenses.DetailOffense", compact("item"));
+        // }
     }
 
     public function generateOffense($id)
@@ -122,6 +122,7 @@ class OffensesRepository implements OffensesInterface
             'PaidBy' => 0,
 
         ]);
+
         return back()->with("success", "Offense has been inserted successfully!");
     }
 

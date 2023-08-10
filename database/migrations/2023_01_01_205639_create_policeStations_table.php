@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('policeStations', function (Blueprint $table) {
             $table->id();
             $table->string("Police_station");
-            $table->string("Police_code");
+            $table->string("Police_code")->unique();
             $table->date("Date");
             $table->timestamps();
         });

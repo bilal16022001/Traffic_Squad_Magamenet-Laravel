@@ -1,6 +1,6 @@
 
-@include('layouts.Header')
-@section('title','Offenses')
+@extends('layouts.Header')
+@section('Title','Pending Offenses')
 
 @if(Auth::guard('web')->check())
 @include("admin.SideBar")
@@ -21,7 +21,8 @@
 <div class="container police">
             <div class="table-responsive">
                 <table class="main-table text-center table table-bordered">
-                  @if(\App\Models\Offense::all()->where("paidStatut", 0)->count() > 0)
+                  @auth("police")
+                  @if(\App\Models\Offense::all()->where("paidStatut", 0)->where("Traffic_id", auth("police")->user()->id)->count() > 0)
                     <tr>
                           <td>#</td>
                           <td>Offense Number</td>
@@ -35,7 +36,25 @@
                     @else
                     <div class="alert alert-info">There is no Pending Offenses yet</div>
                     @endif
-                    @foreach(\App\Models\Offense::all()->where("paidStatut", 0) as $Offense)
+                    @endauth
+                    @auth("web")
+                    @if(\App\Models\Offense::all()->where("paidStatut", 0)->count() > 0)
+                    <tr>
+                          <td>#</td>
+                          <td>Offense Number</td>
+                          <td>offender Name</td>
+                          <td>offender Phone</td>
+                          <td>Paid Statuts</td>
+                          <td>offense date</td>
+                          <td>Paid By</td>
+                          <td>Action</td>
+                    </tr>
+                    @else
+                    <div class="alert alert-info">There is no Pending Offenses yet</div>
+                    @endif
+                    @endauth
+                    @auth("police")
+                    @foreach(\App\Models\Offense::all()->where("paidStatut", 0)->where("Traffic_id", auth("police")->user()->id) as $Offense)
                          <tr>
                            <td>{{$loop->index+1}}</td>
                            <td>{{$Offense->offense_number}}</td>
@@ -96,6 +115,70 @@
                          </tr>
                          
                     @endforeach
+                    @endauth
+                    @auth("web")
+                    @foreach(\App\Models\Offense::all()->where("paidStatut", 0) as $Offense)
+                    <tr>
+                      <td>{{$loop->index+1}}</td>
+                      <td>{{$Offense->offense_number}}</td>
+                      <td>{{$Offense->offender_name}}</td>
+                      <td>{{$Offense->Phone}}</td>
+                      <td>
+                           @if($Offense->paidStatut==0)
+                            not yet
+                           @else
+                            Completed            
+                         @endif
+                      </td>
+                      <td>{{$Offense->offense_date}}</td>
+                      <td>
+                           @if($Offense->PaidBy==0)
+                             not yet
+                             @elseif($Offense->PaidBy==1)
+                                Traffic Police
+                             @elseif($Offense->PaidBy==2)
+                                  Administration
+                           @else
+                                  Offense             
+                           @endif
+                      </td>
+                      <td>
+                          <a href="{{route("AllOffenses.show",$Offense->id)}}" class="btn btn-info btn-sm"><i class="fa fa-solid fa-eye"></i></a>
+                          @auth("police")
+                          <a href="{{route("AllOffenses.edit",$Offense->id)}}" {{$Offense->id}}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
+                          @endauth
+                          <a href="{{route("AllOffenses.generateOffense",$Offense->id)}}" class="btn btn-info btn-sm" href="#"><i class="fa fa-solid fa-download"></i></a>
+                          <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal{{$Offense->id}}" class="btn btn-success btn-sm"><i class="fa fa-trash"></i></a>
+                          
+                      </td>
+                      <div class="modal fade" id="exampleModal{{$Offense->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                       <div class="modal-dialog">
+                         <div class="modal-content">
+                           <div class="modal-header">
+                             <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Offense</h1>
+                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                           </div>
+                           <div class="modal-body">
+                            <form action="{{route("AllOffenses.delete",$Offense->id)}}">
+                             @csrf
+                             @method("DELETE")
+                             <p class="mb-2">  Are you sure To Delete This Offense ?</p>
+                             <input type="hidden" value="{{$Offense->id}}" name="id" />
+                             <input type="text" value="{{$Offense->offender_name}}" class="from-control mb-2" disabled />
+                             <div class="modal-footer">
+                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                               <button type="submit" class="btn btn-primary">Save changes</button>
+                             </div>
+                            </form>
+                           </div>
+                           
+                         </div>
+                       </div>
+                     </div>
+                    </tr>
+                    
+               @endforeach
+                    @endauth
               </table>
          
    	 </div>

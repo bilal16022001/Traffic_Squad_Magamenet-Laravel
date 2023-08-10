@@ -1,7 +1,7 @@
 
-@include('layouts.Header')
+@extends('layouts.Header')
 
-@section('title','Offenses')
+@section('Title','Police Stations')
 
 @if(Auth::guard('web')->check())
 @include("admin.SideBar")
@@ -70,11 +70,12 @@
                   <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Police Station</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body"> 
                   <form action="{{route("PoliceStations.destroy",$item->id)}}" method="POST">
                     @csrf
                     @method("DELETE")
                   <p>Are you sure to delete this Station</p>
+                  <input type="text" class="mb-3" value="{{$item->Police_station}}" disabled />
                   <input type="hidden" value="{{$item->id}}" name="id" />
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

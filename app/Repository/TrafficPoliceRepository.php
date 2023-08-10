@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TrafficPoliceMailable;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 class TrafficPoliceRepository implements TrafficPoliceInterface
@@ -18,13 +19,13 @@ class TrafficPoliceRepository implements TrafficPoliceInterface
     public function index()
     {
 
-        if (Auth::guard('police')->check()) {
-            $Traffic_Polices = TrafficPolice::all()->where("email", auth("police")->user()->email);
-            return view("pages.TrafficPolices.Traffic_Police", compact("Traffic_Polices"));
-        } else {
-            $Traffic_Polices = TrafficPolice::get();
-            return view("pages.TrafficPolices.Traffic_Police", compact("Traffic_Polices"));
-        }
+        // if (Auth::guard('police')->check()) {
+        //     $Traffic_Polices = TrafficPolice::all()->where("email", auth("police")->user()->email);
+        //     return view("pages.TrafficPolices.Traffic_Police", compact("Traffic_Polices"));
+        // } else {
+        $Traffic_Polices = TrafficPolice::get();
+        return view("pages.TrafficPolices.Traffic_Police", compact("Traffic_Polices"));
+        // }
     }
 
     public function edit($id)
@@ -49,11 +50,21 @@ class TrafficPoliceRepository implements TrafficPoliceInterface
     {
         $request->validate([
             'Name' => 'required',
-            'email' => 'required|email',
-            'Phone' => 'required',
+            'email' => 'required|email|unique:trafficpolices,email',
+            'Phone' => 'required|unique:trafficpolices,Phone',
             'Address' => 'required',
             'password' => 'required',
+        ], [
+            'Name.required' => 'Please enter the name.',
+            'email.required' => 'Please enter the email address.',
+            'email.email' => 'Please enter a valid email address.',
+            'email.unique' => 'The email address is already registered.',
+            'Phone.required' => 'Please enter the phone number.',
+            'Phone.unique' => 'The phone number is already registered.',
+            'Address.required' => 'Please enter the address.',
+            'password.required' => 'Please enter a password.',
         ]);
+
         try {
 
             TrafficPolice::create([
@@ -74,7 +85,10 @@ class TrafficPoliceRepository implements TrafficPoliceInterface
 
     public function update($request)
     {
+
+
         try {
+
             $Traffic_Police = TrafficPolice::findOrFail($request->id);
             $old_pass = $Traffic_Police->password;
 
@@ -82,18 +96,14 @@ class TrafficPoliceRepository implements TrafficPoliceInterface
             $Traffic_Police->email = $request->email;
             $Traffic_Police->Phone = $request->Phone;
             $Traffic_Police->Address = $request->Address;
-            $Traffic_Police->password = Hash::make($request->password);
-
 
             if (!empty($request->password)) {
-                $Traffic_Police->password = $request->password;
+                $Traffic_Police->password = Hash::make($request->password);
             } else {
                 $Traffic_Police->password = $old_pass;
             }
 
             $Traffic_Police->save();
-
-            return redirect()->route('TrafficPolices.index');
             return back()->with("success", "Data has been updated successfully!");
         } catch (\Exception $e) {
 

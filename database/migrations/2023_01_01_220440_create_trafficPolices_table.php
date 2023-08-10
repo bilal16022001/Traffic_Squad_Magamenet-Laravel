@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('trafficPolices', function (Blueprint $table) {
             $table->id();
             $table->string('Name');
-            $table->string('email');
-            $table->integer('Phone');
+            $table->string('email')->unique();
+            $table->integer('Phone')->unique();
             $table->string('Address');
             $table->string('password');
             $table->string('image')->nullable();

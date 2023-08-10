@@ -1,6 +1,8 @@
 
-@include('layouts.Header')
-@section('title','Offenses')
+@extends('layouts.Header')
+@section('Title','Edit Offense')
+
+
 @if(Auth::guard('web')->check())
 @include("admin.SideBar")
 @endif
@@ -37,7 +39,7 @@
                       <label>Offender name</label>
                       <input type="text" name="name" value="{{$offense->offender_name}}" required /><br/>
                       <label>place violation</label>
-                      <input type="text" id="place" value="{{$offense->offense_number}}" name="place" value="{{$item->stations->Police_station}}"  required /><br/>
+                      <input type="text" id="place" value="{{$offense->place_violation}}" name="place" value="{{$item->stations->Police_station}}"  required /><br/>
                       <label>section</label>
                       <input type="text" name="section" value="{{$offense->section}}" required /><br/>
                       <label>fine Amount</label>
@@ -55,18 +57,18 @@
               
                 <input class="btn btn-primary" type="submit" value="submit" />
           </form>
-            @else
-            @if ($currentDate > $loopDate)
-            <div class="alert alert-info">last mission you did was in {{ $item->Date }} </div>
-          @elseif ($currentDate < $loopDate)
-            <div class="alert alert-info">You Have a new  mission in {{ $item->Date }} </div>
-    
-        @endif
-              @endif
-            @endforeach
-            @else
-            <div class="alert alert-danger">you cant't add any offesne, beacuse you don't have any mission yet</div>
+          @else
+          @if ($loop->first && $currentDate < $loopDate)
+          <div class="alert alert-danger">you cant't add any offesne, beacuse you don't have any mission yet</div>
+         @endif
+
+     
+
             @endif
+      @endforeach
+          @else
+          <div class="alert alert-danger">you cant't add any offesne, beacuse you don't have any mission yet</div>
+          @endif
         </div>
     </div>
 

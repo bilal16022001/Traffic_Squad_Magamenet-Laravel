@@ -18,6 +18,7 @@
         
                     </ul>
                </li>
+               <li><i class="fa-sharp fa fa-solid fa-file"></i><a href="{{route("TrafficStations.index")}}">My Missions</a></li>
                <li><i class="fa-sharp fa fa-solid fa-file"></i><a href="{{url("/ReportOffenses")}}">Reports</a></li>
                <li><i class="fa-sharp fa fa-solid fa-magnifying-glass"></i><a href="{{url("/SearchOffenses")}}">Search Challan</a></li>
             </ul>

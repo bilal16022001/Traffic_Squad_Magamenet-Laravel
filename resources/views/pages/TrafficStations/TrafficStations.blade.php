@@ -1,6 +1,6 @@
 
-@include('layouts.Header')
-{{-- @section('Title','TrafficPolices') --}}
+@extends('layouts.Header')
+@section('Title','Traffic Stations')
 
 @if(Auth::guard('web')->check())
 @include("admin.SideBar")
@@ -41,7 +41,19 @@
                       <td>{{$item->polices->Name}}</td>
                       @endauth
                       <td>{{$item->stations->Police_station}}</td>
-                      <td>{{$item->Date}}</td>
+                      <td>
+                        @php
+                           $currDate = new DateTime();
+                           $ItemDate = new DateTime($item->Date); 
+                        @endphp
+
+                        @if ($currDate > $ItemDate)
+                         expired in  {{$item->Date}}
+                         @else
+                         {{$item->Date}}
+                        @endif
+                     
+                      </td>
                       @auth("web")
                       <td>
                       

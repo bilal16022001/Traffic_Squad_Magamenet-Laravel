@@ -1,6 +1,6 @@
 
-@include('layouts.Header')
-@section('title','Offenses')
+@extends('layouts.Header')
+@section('Title','Add Offense')
 @if(Auth::guard('web')->check())
 @include("admin.SideBar")
 @endif
@@ -18,7 +18,6 @@
     <div class="parent">
         <div class="newOffense">
             <h2>Add Offense</h2>
-        {{-- {{ \App\Models\PoliceStationTrafficPolice::with("stations", "polices")->where("traffic_police_id",auth("police")->user()->id)->count()}} --}}
             @if(\App\Models\PoliceStationTrafficPolice::with("stations", "polices")->where("traffic_police_id",auth("police")->user()->id)->count()>0)
         @foreach(\App\Models\PoliceStationTrafficPolice::with("stations", "polices")->where("traffic_police_id",auth("police")->user()->id)->get() as $item)
             @php
@@ -55,12 +54,14 @@
                 <input class="btn btn-primary" type="submit" value="submit" />
           </form>
             @else
-            @if ($loop->first && $currentDate < $loopDate)
-            <div class="alert alert-danger">you cant't add any offesne, beacuse you don't have any mission yet</div>
+
+            @if ($currentDate > $loopDate || $currentDate < $loopDate)
+                   @once
+                 <div class="alert alert-danger">you cant't add any offesne, beacuse you don't have any mission yet</div>  
+              @endonce
            @endif
  
-       
-
+     
               @endif
         @endforeach
             @else

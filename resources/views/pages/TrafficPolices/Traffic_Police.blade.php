@@ -1,6 +1,6 @@
 
-@include('layouts.Header')
-@section('Title','TrafficPolices')
+@extends('layouts.Header')
+@section('Title','Traffic Polices')
 
 @if(Auth::guard('web')->check())
 @include("admin.SideBar")
@@ -18,6 +18,7 @@
   
             <div class="table-responsive">
                 <table class="main-table text-center table table-bordered">
+                  @if($Traffic_Polices->count()>0)
                   <tr>
                      <td>#</td>
                      <td>Name</td>
@@ -25,6 +26,9 @@
                      <td>Email</td>
                      <td>Action</td>
                 </tr>
+                @else
+                <div class="alert alert-info">There is no Traffic Polices yet</div>
+                @endif
                 @foreach($Traffic_Polices as $traffic)
                 <tr>
                   <td>{{$loop->index+1}}</td>
@@ -33,10 +37,10 @@
                   <td>{{$traffic->email}}</td>
                   <td>
                     <a data-bs-toggle="modal" data-bs-target="#show{{$traffic->id}}" href="" class="btn btn-info btn-sm"><i class="fa fa-solid fa-eye"></i></a>
-                     @auth("web")
+                
                      <a data-bs-toggle="modal" data-bs-target="#edit{{$traffic->id}}" href=""  class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
                      <a data-bs-toggle="modal" data-bs-target="#delete{{$traffic->id}}" href="" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                     @endauth
+                    
                   </td>
                 </tr>
                      <!--start show Modal -->

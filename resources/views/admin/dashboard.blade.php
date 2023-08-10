@@ -23,7 +23,7 @@
           <span>{{$data['OffensesPnding']}}</span>   
         </div>
         <div class="view">
-           <a href="OffensesPending">View All</a>
+           <a href="PendingOffenses">View All</a>
         </div>
      </div>
 
@@ -36,7 +36,7 @@
              <span>{{$data['OffensesComplet']}}</span>   
           </div>
           <div class="view">
-              <a href="OffensesComplet">View All</a>
+              <a href="CompletedOffenses">View All</a>
           </div>
      </div>
    <div class="">

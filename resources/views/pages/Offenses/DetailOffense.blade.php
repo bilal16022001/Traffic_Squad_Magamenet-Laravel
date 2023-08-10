@@ -1,7 +1,7 @@
 
 
-@include('layouts.Header')
-@section('title','Offenses')
+@extends('layouts.Header')
+@section('Title','detail Offense')
 
 @if(Auth::guard('web')->check())
 @include("admin.SideBar")
